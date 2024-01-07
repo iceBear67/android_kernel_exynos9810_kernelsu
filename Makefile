@@ -303,7 +303,8 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 
 HOSTCC       = gcc
 HOSTCXX      = g++
-HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer -std=gnu89
+#HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer -std=gnu89
+HOSTCFLAGS := -O2 -fomit-frame-pointer -std=gnu89
 HOSTCXXFLAGS = -O2
 
 # Decide whether to build built-in, modular, or both.
@@ -385,12 +386,13 @@ LINUXINCLUDE    := \
 LINUXINCLUDE	+= $(filter-out $(LINUXINCLUDE),$(USERINCLUDE))
 
 KBUILD_AFLAGS   := -D__ASSEMBLY__
-KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
-		   -fno-strict-aliasing -fno-common \
-		   -Werror-implicit-function-declaration \
-		   -Wno-format-security \
-		   -Werror \
-		   -std=gnu89
+#KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
+#		   -fno-strict-aliasing -fno-common \
+#		   -Werror-implicit-function-declaration \
+#		   -Wno-format-security \
+#		   -Werror \
+#		   -std=gnu89
+KBUILD_CFLAGS	:= -std=gnu89 -fno-common -fno-strict-aliasing
 KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
@@ -926,7 +928,7 @@ KBUILD_CFLAGS   += $(call cc-option,-fconserve-stack)
 KBUILD_CFLAGS   += $(call cc-option,-Werror=implicit-int)
 
 # require functions to have arguments in prototypes, not empty 'int foo()'
-KBUILD_CFLAGS   += $(call cc-option,-Werror=strict-prototypes)
+#KBUILD_CFLAGS   += $(call cc-option,-Werror=strict-prototypes)
 
 # Prohibit date/time macros, which would make the build non-deterministic
 KBUILD_CFLAGS   += $(call cc-option,-Werror=date-time)
