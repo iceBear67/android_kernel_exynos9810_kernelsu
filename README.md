@@ -13,6 +13,8 @@ Some changes:
 
 Essential tools should be installed beforehand.
 
+Or download image directly from Releases.
+
 > *note*
 > 
 > For arch users: `sudo pacman -Sy base-devel git`
